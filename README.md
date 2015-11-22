@@ -74,4 +74,4 @@ Give it a try: https://github.com/ultimatejs/tracker-react-todos-example
 
 *Thanks for helping us bridge the Blaze world we know to what will be a delightful React future.* **Long Live Meteor!** *Stay tuned for more coming out of the* ***Sideburns*** and ***Blaze React*** *project. Pull requests welcome.*  
 
-####FINAL NOTE: Take a look at the code. It's extremely simple. It's in one mixin file: `tracker-react-mixin.jsx`. To make the transition to React it's important we are informed. We can do this together.
+######FINAL NOTE: Take a look at the code. It's extremely simple. It's in one mixin file: `tracker-react-mixin.jsx`. To make the transition to React it's important we are informed. We can do this together.
