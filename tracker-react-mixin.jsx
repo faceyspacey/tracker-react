@@ -1,5 +1,5 @@
 TrackerReact = {}; //so server side rendering isn't broken
-if(Meteor.isServer) return
+if(Meteor.isServer) return;
 
 TrackerReact = {
 	componentWillMount() {
@@ -31,9 +31,10 @@ TrackerReact = {
 		let oldFunction = this[prop];
 	
 		this[prop] = function() {
-			if(this._computations[prop]) this._computations[prop].stop(); //there will be a computation every re-run except the 1st
 			let args = arguments,
 				response;
+			
+			if(this._computations[prop]) this._computations[prop].stop(); //there will be a computation every re-run except the 1st
 		
 			//The magic behind this computation is it only ever runs once after its first run.
 			//When it does run that 2nd time, it's used just to force an update. The reactive function it wraps isn't even called.
