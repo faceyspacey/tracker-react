@@ -68,5 +68,6 @@ App = React.createClass({
 Tasks = new Mongo.Collection('tasks');
 ```
 
+----
 ###An example app has been prepared to quickly test it. 
 Give it a try: https://github.com/ultimatejs/tracker-react-todos-example
