@@ -4,7 +4,7 @@ This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` 
 
 Note: There are a few ways to prevent methods from being reactive, as seen below in the comments.
 
-EXAMPLE:
+## EXAMPLE:
 
 ```
 App = React.createClass({
@@ -28,7 +28,7 @@ App = React.createClass({
 		});
 	},
 
-    //events are also blocked from being reactive; for now we put them in a map on the `events` key (subject to change)
+    //events are also blocked from being reactive; for now we put them in a map return from a method named `events` 
     events() {
         return {
             editTitle: function() {
