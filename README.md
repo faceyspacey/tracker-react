@@ -72,4 +72,4 @@ Tasks = new Mongo.Collection('tasks');
 ###An example app has been prepared to quickly test it. 
 Give it a try: https://github.com/ultimatejs/tracker-react-todos-example
 
-*Thanks for helping us bridge the Blaze world we know to what will be a delightful React future. Long Live Meteor! Stay tuned for more coming out of the* ***Sideburns*** and ***Blaze React*** *project. Pull requests welcome.*  
+*Thanks for helping us bridge the Blaze world we know to what will be a delightful React future.* **Long Live Meteor!** *Stay tuned for more coming out of the* ***Sideburns*** and ***Blaze React*** *project. Pull requests welcome.*  
