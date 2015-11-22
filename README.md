@@ -1,6 +1,6 @@
 ## TrackerReact
 
-This mixin is upgrade to what `ReactMeteorData` offers. With it you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) automatically registers its dependencies and is automatically tracked.
+This mixin is an upgrade to what `ReactMeteorData` offers. With it you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) automatically registers its dependencies and is automatically tracked.
 
 There are a few ways to prevent methods from being reactive, as seen below.
 
