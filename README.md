@@ -68,4 +68,5 @@ App = React.createClass({
 Tasks = new Mongo.Collection('tasks');
 ```
 
-For more information, see [the guide](http://react-in-meteor.readthedocs.org/en/latest/meteor-data/).
+###An example app has been prepared to quickly test it. 
+Give it a try: https://github.com/ultimatejs/tracker-react-todos-example
