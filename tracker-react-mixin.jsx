@@ -23,18 +23,27 @@ TrackerReact = {
 		let oldRender = this.render;
 	
 		this.render = () => {
-			let response;
-		
-			if(this._renderComputation) this._renderComputation.stop(); //there will be a computation every re-run except the 1st
-			
-			this._renderComputation = Tracker.nonreactive(() => {
-				return Tracker.autorun(c => {
-			    		if(c.firstRun) response = oldRender.call(this); 
-			    		else this.forceUpdate();
-				});
-			});
-			
-		    return response;
+			return this.distinctAutorun('_renderComputation', oldRender);
 		};
+	},
+	distinctAutorun(name, dataFunc) {
+		return Tracker.distinctAutorun(name, this, dataFunc, this.forceUpdate);
 	}
 };	
+
+
+//might as well abstract this pattern since something tells me we'll be using it a lot
+Tracker.distinctAutorun = function(name, context, dataFunc, updateFunc) {
+	let data;
+		
+	if(context[name]) context[name].stop(); //there will be a computation every re-run except the 1st
+
+	context[name] = Tracker.nonreactive(() => {
+		return Tracker.autorun(c => {
+	    		if(c.firstRun) data = dataFunc.call(context); 
+	    		else updateFunc.call(context); 
+		});
+	});
+	
+	return data;
+};
