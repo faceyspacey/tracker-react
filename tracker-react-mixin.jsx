@@ -38,7 +38,7 @@ Tracker.once = function(name, context, dataFunc, updateFunc) {
 
     if (context[name] && !context[name].stopped) context[name].stop(); //stop it just in case the autorun never re-ran
 
-    context[name] = Tracker.nonreactive(() => {
+    context[name] = Tracker.nonreactive(() => { //NOTE: we may want to run this code in `setTimeout(func, 0)` so it doesn't impact the rendering phase at all
         return Tracker.autorun(c => {
             if (c.firstRun) data = dataFunc.call(context);
             else {
