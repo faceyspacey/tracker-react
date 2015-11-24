@@ -23,25 +23,28 @@ TrackerReact = {
 		let oldRender = this.render;
 	
 		this.render = () => {
-			return this.distinctAutorun('_renderComputation', oldRender);
+			return this.autorunOnce('_renderComputation', oldRender); //simple method we can offer in the `Meteor.Component` API
 		};
 	},
-	distinctAutorun(name, dataFunc) {
-		return Tracker.distinctAutorun(name, this, dataFunc, this.forceUpdate);
+	autorunOnce(name, dataFunc) {
+		return Tracker.once(name, this, dataFunc, this.forceUpdate);
 	}
 };	
 
 
 //might as well abstract this pattern since something tells me we'll be using it a lot
-Tracker.distinctAutorun = function(name, context, dataFunc, updateFunc) {
+Tracker.once = function(name, context, dataFunc, updateFunc) {
 	let data;
 		
-	if(context[name]) context[name].stop(); //there will be a computation every re-run except the 1st
+	if(context[name] && !context[name].stopped) context[name].stop(); //stop it just in case the autorun never re-ran
 
 	context[name] = Tracker.nonreactive(() => {
 		return Tracker.autorun(c => {
 	    		if(c.firstRun) data = dataFunc.call(context); 
-	    		else updateFunc.call(context); 
+	    		else {
+					if(context[name]) context[name].stop(); //stop autorun here so rendering "phase" doesn't have extra work of also stopping autoruns; likely not too important though.
+					updateFunc.call(context); //where `forceUpdate` will be called in above implementation 
+				}
 		});
 	});
 	
