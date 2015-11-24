@@ -4,7 +4,7 @@
 meteor add ultimatejs:tracker-react
 ```
 
-This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) *automatically* registers its dependencies and is *automatically* tracked. In doing so it replicates the standard helper experience from Meteor/Blaze. Enjoy!
+This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) *automatically* registers its dependencies and is *automatically* tracked. In addition, the render method is also reactive, which means you can use reactive variables outside the `render` method and component's scope and expect it to be reactive. This replicates the standard helper experience from Meteor/Blaze. Enjoy!
 
 Note: There are a few ways to prevent methods from being reactive, as seen below in the comments.
 
