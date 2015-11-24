@@ -1,7 +1,7 @@
 Package.describe({
 	name: "ultimatejs:tracker-react",
 	summary: "Helper-level reactive methods",
-	version: '0.0.2',
+	version: '0.0.3',
 	documentation: 'README.md',
 	git: 'https://github.com/ultimatejs/tracker-react'
 });

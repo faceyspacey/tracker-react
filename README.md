@@ -4,10 +4,8 @@
 meteor add ultimatejs:tracker-react
 ```
 
-This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) *automatically* registers its dependencies and is *automatically* tracked. In addition, the render method is also reactive, which means you can use reactive variables outside the `render` method and component's scope and expect it to be reactive. This replicates the standard helper experience from Meteor/Blaze. Enjoy!
-
-Note: There are a few ways to prevent methods from being reactive, as seen below in the comments.
-
+This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) *automatically* registers its dependencies and is *automatically* tracked. In addition, the `render()` method is also reactive, which means you can use reactive variables outside the `render` method and component's scope and expect it to be reactive. This replicates the standard helper experience from Meteor/Blaze. Enjoy!
+ 
 GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 
 ## EXAMPLE:
@@ -16,54 +14,29 @@ GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 App = React.createClass({
     mixins: [TrackerReact],
 
-    //automatically reactive helpers, no need for `getMeteorData`!
+	//tracker-based reactivity in action, no need for `getMeteorData`!
+    tasks() {
+        return Tasks.find({}).fetch(); //fetch must be called to trigger reactivity
+    },
+	
+	
+	//state-based reactivity working in conjunection with tracker-based reactivity; track render autoruns are updated!
     title() {
-        return Session.get('title') ? ' (' + Session.get('title') + ')' : '';
-    },
-    getCurrenTask() {
-        return Session.get('currentTask') || 'n/a';
-    },
-    getTasks() {
-        return Tasks.find({}).fetch(); //MAKE SURE YOU CALL `fetch()` TO TRIGGER REACTIVITY!
-    },
-
-    //underscore prevents method from being reactive
-	_renderTasks() {
-		return this.getTasks().map((task) => {
-			return <Task key={task._id} task={task} />;
-		});
-	},
-
-    //events are also blocked from being reactive; for now we put them in a map return from a method named `events` 
-    events() {
-        return {
-            editTitle: function() {
-                let title = prompt('Enter a title for this to do list');
-                Session.set('title', title);
-            },
-            addTask: function() {
-                Tasks.insert({text: prompt('Enter the title of a task buddy')});
-            }
-        }
+		return this.state && this.state.title ? `(${this.state.title})` : ``;
     },
 
 	
 	render() {
 		return (
 			<div className="container">
-				<header>
-					<h1>
-						Todo List {this.title()}
-						<span style={{color: 'blue', fontStyle: 'italic', cursor: 'pointer'}} onClick={this.editTitle}> edit title</span>
-					</h1> 
-
-					<h2>current task: <i>{this.getCurrenTask()}</i></h2>
-
-					<button onClick={this.addTask}>ADD TASK</button>
-				</header>
+				<h1>
+					Todo List {this.title()}
+				</h1>
 
 				<ul>
-				  	  {this._renderTasks()}
+				  	  {this.tasks().map((task) => {
+						  return <Task key={task._id} task={task} />;
+					  })}
 				</ul>
 			</div>
 		);
