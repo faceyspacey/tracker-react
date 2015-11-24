@@ -40,11 +40,11 @@ Tracker.once = function(name, context, dataFunc, updateFunc) {
 
 	context[name] = Tracker.nonreactive(() => {
 		return Tracker.autorun(c => {
-	    		if(c.firstRun) data = dataFunc.call(context); 
-	    		else {
-					if(context[name]) context[name].stop(); //stop autorun here so rendering "phase" doesn't have extra work of also stopping autoruns; likely not too important though.
-					updateFunc.call(context); //where `forceUpdate` will be called in above implementation 
-				}
+    		if(c.firstRun) data = dataFunc.call(context); 
+    		else {
+				if(context[name]) context[name].stop(); //stop autorun here so rendering "phase" doesn't have extra work of also stopping autoruns; likely not too important though.
+				updateFunc.call(context); //where `forceUpdate` will be called in above implementation 
+			}
 		});
 	});
 	
