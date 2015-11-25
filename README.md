@@ -20,7 +20,7 @@ App = React.createClass({
     },
 	
 	
-	//state-based reactivity working in conjunection with tracker-based reactivity.
+	//state-based reactivity working in conjunction with tracker-based reactivity.
 	//track render autoruns are kept up to date!
     title() {
 		return this.state && this.state.title ? `(${this.state.title})` : ``;
