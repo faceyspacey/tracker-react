@@ -4,7 +4,7 @@
 meteor add ultimatejs:tracker-react
 ```
 
-This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Every one of your methods which uses reactive data sources (e.g: `collection.find()` or `Session.get('foo')`) *automatically* registers its dependencies and is *automatically* tracked. In addition, the `render()` method is also reactive, which means you can use reactive variables outside the `render` method and component's scope and expect it to be reactive. This replicates the standard helper experience from Meteor/Blaze. Enjoy!
+This mixin is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" alll your reactivity in a single method. Any *reactive data sources* (e.g: `collection.find()` or `Session.get('foo')`) used in your `render` method or by methods called by your `render` method are automatically reactive! This replicates the standard helper experience from Meteor/Blaze. Enjoy!
  
 GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 
@@ -12,30 +12,23 @@ GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 
 ```
 App = React.createClass({
-    mixins: [TrackerReact],
+	mixins: [TrackerReact],
 
 	//tracker-based reactivity in action, no need for `getMeteorData`!
-    tasks() {
-        return Tasks.find({}).fetch(); //fetch must be called to trigger reactivity
-    },
+  tasks() {
+      return Tasks.find({}).fetch(); //fetch must be called to trigger reactivity
+  },
 	
-	
-	//state-based reactivity working in conjunction with tracker-based reactivity.
-	//track render autoruns are kept up to date!
-    title() {
-		return this.state && this.state.title ? `(${this.state.title})` : ``;
-    },
 
-	
 	render() {
 		return (
 			<div className="container">
 				<h1>
-					Todo List {this.title()}
+					Todo List - {Session.get('title')}
 				</h1>
 
 				<ul>
-				  	  {this.tasks().map((task) => {
+				  	{this.tasks().map((task) => {
 						  return <Task key={task._id} task={task} />;
 					  })}
 				</ul>
@@ -43,9 +36,6 @@ App = React.createClass({
 		);
 	}
 });
-
-
-Tasks = new Mongo.Collection('tasks');
 ```
 
 ----

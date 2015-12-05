@@ -10,9 +10,9 @@ Package.onUse(function (api) {
 	api.versionsFrom('METEOR@1.2.0.2');
 	api.use('tracker');
 	api.use('underscore');
-	api.use('jsx@0.2.3');
-
-	api.addFiles('tracker-react-mixin.jsx');
+	api.use('ecmascript@0.1.5');
+	
+	api.addFiles('tracker-react-mixin.js');
 	api.export('TrackerReact');
 });
 
