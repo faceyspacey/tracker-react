@@ -23,7 +23,6 @@ TrackerReact = {
         let oldRender = this.render;
 
         this.render = () => {
-						console.log('OLD RENDER')
             return this.autorunOnce('_renderComputation', oldRender); //simple method we can offer in the `Meteor.Component` API
         };
     },
