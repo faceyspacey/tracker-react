@@ -15,9 +15,9 @@ App = React.createClass({
 	mixins: [TrackerReact],
 
 	//tracker-based reactivity in action, no need for `getMeteorData`!
-  tasks() {
-      return Tasks.find({}).fetch(); //fetch must be called to trigger reactivity
-  },
+	tasks() {
+	    return Tasks.find({}).fetch(); //fetch must be called to trigger reactivity
+	},
 	
 
 	render() {
