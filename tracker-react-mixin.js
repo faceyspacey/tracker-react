@@ -19,7 +19,7 @@ TrackerReact = {
     //Meteor's various reactive data sources AND React's functional + unidirectional re-running of 
     //everything in component branches with state changes. 
 
-    autorunRender(prop) {
+    autorunRender() {
         let oldRender = this.render;
 
         this.render = () => {
