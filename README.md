@@ -12,7 +12,7 @@ GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 From **Meteor v.1.3-Beta11 and up**, react components can be made reactive either by using TrackerReact in a *Composition (inheritance)*, as *Mixin* or as *Decorator*.
 
 #### EXAMPLE
-Compositions (wrapping a relevant React.Component in TrackerReact) is a clean, default alternative until Meteor supports decorators.
+**Composition** (wrapping a relevant React.Component in TrackerReact) is a clean, default alternative until Meteor supports decorators.
 
 ```jsx
 import React from 'react';
@@ -62,7 +62,7 @@ class App extends TrackerReact(React.Component) {
 });
 ```
 
-Same is possible as Mixin (ES6 example)
+Same is possible **as Mixin** (ES6 example)
 
 ```jsx
 import React from 'react';
@@ -86,7 +86,7 @@ class App extends React.Component {
 ReactMixin(App.prototype, TrackerReactMixin);
 ```
 
-Same example as Decorator (ES6/ES7 Example).
+Same example **as Decorator** (ES6/ES7 Example).
 Cleanest solution: Requires support for decorators either setting babel to experimental or TypeScript with experimental ES7 features turned on.
 
 ```jsx
@@ -107,7 +107,7 @@ class App extends React.Component {
 ```
 
 #### Old Example: Meteor 1.2
-Package version: `ultimatejs:tracker-react@0.0.6
+Package version: `ultimatejs:tracker-react@0.0.6`
 ```jsx
 App = React.createClass({
 	mixins: [TrackerReact],
