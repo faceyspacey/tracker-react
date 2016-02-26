@@ -1,6 +1,6 @@
 Package.describe({
 	name: "ultimatejs:tracker-react",
-	summary: "Helper-level reactive methods",
+	summary: "No-Config reactive React Components with Tracker. Apply as composition, mixin or decorator.",
 	version: '1.0.0',
 	documentation: 'README.md',
 	git: 'https://github.com/ultimatejs/tracker-react'
