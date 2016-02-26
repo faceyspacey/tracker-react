@@ -29,7 +29,6 @@ export default TrackerReact = function (Component) {
 
     constructor(...args) {
       super(...args);
-      console.log("TrackerReact engaged!");
       this.autorunRender();
     }
 
