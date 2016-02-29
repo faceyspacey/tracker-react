@@ -29,9 +29,12 @@ class App extends TrackerReact(React.Component) {
 
 	// Note: In ES6, constructor() === componentWillMount() in React ES5
 	constructor() {
-		this.state.subscriptions: {
-			tasks: Meteor.subscribe('tasks');
-		}
+		super();
+		this.state = {
+          subscription: {
+            tasks: Meteor.subscribe('tasks')
+          }
+        }
 	}
 	
 	componentWillUnmount() {

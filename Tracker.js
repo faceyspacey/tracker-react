@@ -1,5 +1,8 @@
+// Also available as a global
+import { Tracker } from 'meteor/tracker';
+
 /**
- * Create "one-time" reactive computations with Tracker (available as global)
+ * Create "one-time" reactive computations with Tracker
  * @param name {string} Component Reactive Data Property for Computation
  * @param context {*} Target Component Instance
  * @param dataFunc {*} Data Context
