@@ -15,7 +15,9 @@ GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 ## Usage
 From **Meteor v.1.3-Beta11 and up**, react components can be made reactive either by using TrackerReact in a *Composition (inheritance)*, as *Mixin* or as *Decorator*.
 
-#### EXAMPLE Application: https://github.com/D1no/TrackerReact-Example
+#### Example
+https://github.com/D1no/TrackerReact-Example
+
 **Composition** (wrapping a relevant React.Component in TrackerReact) is a clean, default alternative until Meteor supports decorators.
 
 ```jsx
