@@ -1,9 +1,13 @@
-## TrackerReact
-
+![image](https://cloud.githubusercontent.com/assets/2397125/13386784/90369cda-deb0-11e5-8900-f13660467cd1.png)
+##### Meteor 1.3
 ```
 meteor add ultimatejs:tracker-react
 ```
+##### Meteor 1.2
 
+```
+meteor add ultimatejs:tracker-react@0.0.6
+```
 TrackerReact is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact` instead you are no longer required to "freeze" all your reactivity in a single method. Any *reactive data sources* (e.g: `collection.find()` or `Session.get('foo')`) used in your `render` method or by methods called by your `render` method are automatically reactive! This replicates the standard helper experience from Meteor/Blaze. Enjoy!
 
 GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
@@ -11,7 +15,7 @@ GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 ## Usage
 From **Meteor v.1.3-Beta11 and up**, react components can be made reactive either by using TrackerReact in a *Composition (inheritance)*, as *Mixin* or as *Decorator*.
 
-#### EXAMPLE
+#### EXAMPLE Application: https://github.com/D1no/TrackerReact-Example
 **Composition** (wrapping a relevant React.Component in TrackerReact) is a clean, default alternative until Meteor supports decorators.
 
 ```jsx
