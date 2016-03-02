@@ -35,8 +35,8 @@ export default TrackerReact = function (Component, opt) {
       super(...args);
       this._profMode = opt;
 
-      profiler.log(this._profMode, 0, this.constructor.name);
-      profiler.time(this._profMode, 0, this.constructor.name);
+      profiler && profiler.log(this._profMode, 0, this.constructor.name);
+      profiler && profiler.time(this._profMode, 0, this.constructor.name);
 
       /*
        Overloading the constructors `componentWillUnmount` method to ensure that computations are stopped and a
@@ -53,7 +53,7 @@ export default TrackerReact = function (Component, opt) {
         this.constructor.prototype.componentWillUnmount = function (...args) {
           superComponentWillUnmount.call(this, ...args);
 
-          profiler.log(this._profMode, 4, this.constructor.name);
+          profiler && profiler.log(this._profMode, 4, this.constructor.name);
 
           this._renderComputation.stop();
           this._renderComputation = null;
@@ -64,9 +64,9 @@ export default TrackerReact = function (Component, opt) {
     }
 
     componentDidUpdate() {
-      profiler.timeEnd(this._profMode, 1, this.constructor.name);
-      profiler.groupEnd(this._profMode, 0, this.constructor.name);
-      profiler.timeEnd(this._profMode, 0, this.constructor.name);
+      profiler && profiler.timeEnd(this._profMode, 1, this.constructor.name);
+      profiler && profiler.groupEnd(this._profMode, 0, this.constructor.name);
+      profiler && profiler.timeEnd(this._profMode, 0, this.constructor.name);
     }
 
     autorunRender() {
@@ -101,8 +101,8 @@ export const TrackerReactMixin = {
     // No reactive computations needed for Server Side Rendering
     if (Meteor.isServer) return;
 
-    profiler.log(this._profMode, 0, this.constructor.name);
-    profiler.time(this._profMode, 0, this.constructor.name);
+    profiler && profiler.log(this._profMode, 0, this.constructor.name);
+    profiler && profiler.time(this._profMode, 0, this.constructor.name);
 
     this.autorunRender();
   },
@@ -110,15 +110,15 @@ export const TrackerReactMixin = {
     // No reactive computations needed for Server Side Rendering
     if (Meteor.isServer) return;
 
-    profiler.log(this._profMode, 4, this.constructor.name);
+    profiler && profiler.log(this._profMode, 4, this.constructor.name);
 
     this._renderComputation.stop();
     this._renderComputation = null;
   },
   componentDidUpdate() {
-    profiler.timeEnd(this._profMode, 1, this.constructor.name);
-    profiler.groupEnd(this._profMode, 0, this.constructor.name);
-    profiler.timeEnd(this._profMode, 0, this.constructor.name);
+    profiler && profiler.timeEnd(this._profMode, 1, this.constructor.name);
+    profiler && profiler.groupEnd(this._profMode, 0, this.constructor.name);
+    profiler && profiler.timeEnd(this._profMode, 0, this.constructor.name);
   },
   autorunRender() {
     let oldRender = this.render;
