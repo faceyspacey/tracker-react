@@ -31,6 +31,8 @@ export default TrackerReact = function (Component, opt) {
 
   class TrackerReactComponent extends Component {
 
+    // ToDo: Include profiler as general static method for better inheritance (constructor init; lazy commonJS require)
+
     constructor(...args) {
       super(...args);
       this._profMode = opt;
