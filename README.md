@@ -20,6 +20,7 @@ Clone & Read the Source: https://github.com/D1no/TrackerReact-Example
 
 ![trackerreact-demo](https://cloud.githubusercontent.com/assets/2397125/13449628/b715eee0-e02d-11e5-9e62-2397397836d5.gif)
 #### Profiling
+*Currently only under the `profiler` brench*
 Use the profiler argument `TrackerReact(React.Component, {profiler: true})` to see render times of a reactive components. Or set `this._profMode = {profiler: true}` within the `constructor()` function.
 
 #### Implementation

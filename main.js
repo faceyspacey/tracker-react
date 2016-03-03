@@ -15,7 +15,6 @@ import Tracker from './Tracker';
  * everything in component branches with state changes.
  */
 
-import {mode, profiler} from './profiler';
 
 /**
  * Default. Provides a react component for inheritance as a clean alternative to mixins.
@@ -27,18 +26,10 @@ export default TrackerReact = function (Component, opt) {
   // No reactive computations needed for Server Side Rendering
   if (Meteor.isServer) return Component;
 
-  Object.assign(mode, opt);
-
   class TrackerReactComponent extends Component {
-
-    // ToDo: Include profiler as general static method for better inheritance (constructor init; lazy commonJS require)
 
     constructor(...args) {
       super(...args);
-      this._profMode = opt;
-
-      profiler && profiler.log(this._profMode, 0, this.constructor.name);
-      profiler && profiler.time(this._profMode, 0, this.constructor.name);
 
       /*
        Overloading the constructors `componentWillUnmount` method to ensure that computations are stopped and a
@@ -55,20 +46,12 @@ export default TrackerReact = function (Component, opt) {
         this.constructor.prototype.componentWillUnmount = function (...args) {
           superComponentWillUnmount.call(this, ...args);
 
-          profiler && profiler.log(this._profMode, 4, this.constructor.name);
-
           this._renderComputation.stop();
           this._renderComputation = null;
         };
       }
 
       this.autorunRender();
-    }
-
-    componentDidUpdate() {
-      profiler && profiler.timeEnd(this._profMode, 1, this.constructor.name);
-      profiler && profiler.groupEnd(this._profMode, 0, this.constructor.name);
-      profiler && profiler.timeEnd(this._profMode, 0, this.constructor.name);
     }
 
     autorunRender() {
@@ -81,7 +64,7 @@ export default TrackerReact = function (Component, opt) {
     }
 
     autorunOnce(name, dataFunc) {
-      return Tracker.once(name, this, dataFunc, this.forceUpdate, this._profMode, profiler);
+      return Tracker.once(name, this, dataFunc, this.forceUpdate);
     }
   }
 
@@ -98,13 +81,9 @@ export default TrackerReact = function (Component, opt) {
  *   autorunOnce: (function(*=, *=))}}
  */
 export const TrackerReactMixin = {
-  _profMode: mode,
   componentWillMount() {
     // No reactive computations needed for Server Side Rendering
     if (Meteor.isServer) return;
-
-    profiler && profiler.log(this._profMode, 0, this.constructor.name);
-    profiler && profiler.time(this._profMode, 0, this.constructor.name);
 
     this.autorunRender();
   },
@@ -112,15 +91,8 @@ export const TrackerReactMixin = {
     // No reactive computations needed for Server Side Rendering
     if (Meteor.isServer) return;
 
-    profiler && profiler.log(this._profMode, 4, this.constructor.name);
-
     this._renderComputation.stop();
     this._renderComputation = null;
-  },
-  componentDidUpdate() {
-    profiler && profiler.timeEnd(this._profMode, 1, this.constructor.name);
-    profiler && profiler.groupEnd(this._profMode, 0, this.constructor.name);
-    profiler && profiler.timeEnd(this._profMode, 0, this.constructor.name);
   },
   autorunRender() {
     let oldRender = this.render;
@@ -131,6 +103,6 @@ export const TrackerReactMixin = {
     };
   },
   autorunOnce(name, dataFunc) {
-    return Tracker.once(name, this, dataFunc, this.forceUpdate, this._profMode, profiler);
+    return Tracker.once(name, this, dataFunc, this.forceUpdate);
   }
 };
