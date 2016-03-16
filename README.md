@@ -1,5 +1,7 @@
 ![image](https://cloud.githubusercontent.com/assets/2397125/13386784/90369cda-deb0-11e5-8900-f13660467cd1.png)
+Current Version: `1.0.4`
 ##### Meteor 1.3
+*Pre-Release*: Make sure to update your meteor project to the [latest pre-release](https://github.com/meteor/meteor/releases) running i.e: `meteor update --release METEOR@1.3-rc.1`
 ```
 meteor add ultimatejs:tracker-react
 ```
@@ -20,7 +22,7 @@ Clone & Read the Source: https://github.com/D1no/TrackerReact-Example
 
 ![trackerreact-demo](https://cloud.githubusercontent.com/assets/2397125/13449628/b715eee0-e02d-11e5-9e62-2397397836d5.gif)
 #### Profiling
-*Currently only under the `profiler` brench*
+*Currently only under the `profiler` Branch and will be added with the final release of Meteor 1.3*
 Use the profiler argument `TrackerReact(React.Component, {profiler: true})` to see render times of a reactive components. Or set `this._profMode = {profiler: true}` within the `constructor()` function.
 
 #### Implementation
