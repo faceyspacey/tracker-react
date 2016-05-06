@@ -1,7 +1,7 @@
 ![image](https://cloud.githubusercontent.com/assets/2397125/13386784/90369cda-deb0-11e5-8900-f13660467cd1.png)
-Current Version: `1.0.4`
+Current Version: `1.0.5`
 ##### Meteor 1.3
-*Pre-Release*: Make sure to update your meteor project to the [latest pre-release](https://github.com/meteor/meteor/releases) running i.e: `meteor update --release METEOR@1.3-rc.1`
+
 ```
 meteor add ultimatejs:tracker-react
 ```
@@ -15,7 +15,7 @@ TrackerReact is an upgrade to what `ReactMeteorData` offers. Using `TrackerReact
 GOTCHA: You must call `.fetch()` on your cursors to trigger reactivity!!
 
 ## Usage
-From **Meteor v.1.3-Beta11 and up**, react components can be made reactive either by using TrackerReact in a *Composition (inheritance)*, as *Mixin* or as *Decorator*.
+From **Meteor v.1.3 and up**, react components can be made reactive either by using TrackerReact in a *Composition (inheritance)*, as *Mixin* or as *Decorator*.
 
 #### Example-App
 Clone & Read the Source: https://github.com/D1no/TrackerReact-Example
