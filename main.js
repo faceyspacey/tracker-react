@@ -44,7 +44,9 @@ export default TrackerReact = function (Component, opt) {
         let superComponentWillUnmount = this.constructor.prototype.componentWillUnmount;
 
         this.constructor.prototype.componentWillUnmount = function (...args) {
-          superComponentWillUnmount.call(this, ...args);
+          if (superComponentWillUnmount) {
+            superComponentWillUnmount.call(this, ...args);
+          }
 
           this._renderComputation.stop();
           this._renderComputation = null;
